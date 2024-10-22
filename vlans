@@ -1,4 +1,4 @@
-# 2024-10-22 13:49:00 by RouterOS 7.16
+# 2024-10-22 13:53:51 by RouterOS 7.16
 # software id = EIDY-MLTG
 #
 # model = RB962UiGS-5HacT2HnT
@@ -59,9 +59,10 @@ add action=drop chain=forward comment="GST > ADM" dst-address=10.10.20.0/24 src-
 add action=drop chain=forward comment="DMZ > ADM" dst-address=10.10.20.0/24 src-address=10.10.50.0/24
 add action=drop chain=forward comment="DMZ > WS" dst-address=10.10.30.0/24 src-address=10.10.50.0/24
 add action=drop chain=forward comment="DMZ >GST" dst-address=10.10.40.0/24 src-address=10.10.50.0/24
-add action=accept chain=forward comment="WAN > DMZ (http)" dst-address-list=10.10.50.0/24 dst-port=80 in-interface=ether1 \
+add action=accept chain=forward comment="WAN > DMZ (https)" dst-address=10.10.50.0/24 dst-port=443 in-interface=ether1 \
     protocol=tcp
-add action=accept chain=forward comment="WAN > DMZ (https)" dst-address=10.10.50.0/24 in-interface=ether1
+add action=accept chain=forward comment="WAN > DMZ (http)" dst-address=10.10.50.0/24 dst-port=80 in-interface=ether1 \
+    protocol=tcp
 add action=drop chain=input comment="WAN > NO!"
 /ip firewall nat
 add action=masquerade chain=srcnat comment="NAT for WAN" out-interface=ether1
